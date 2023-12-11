@@ -15,7 +15,7 @@ const newBtn = document.querySelector(".btn--new");
 const rollBtn = document.querySelector(".btn--roll");
 const holdBtn = document.querySelector(".btn--hold");
 
-let scores, currentScore, activePlayer, isPlaying;
+let scores, currentScore, activePlayer, isPlaying, previousDice;
 
 const initialize = () => {
   scores = [0, 0];
@@ -47,12 +47,18 @@ const switchPlayer = () => {
 
 const rollDice = () => {
   if (isPlaying) {
-    let dice = Math.trunc(Math.random() * 6) + 1;
+    let dice;
+
+    do {
+      dice = Math.trunc(Math.random() * 6) + 1;
+    } while (dice === previousDice);
+
+    previousDice = dice;
 
     diceImg.classList.remove("hidden");
     diceImg.src = `./images/dice-${dice}.png`;
 
-    if (dice !== 1 && dice !== 6) {
+    if (dice !== 1) {
       currentScore += dice;
       document.querySelector(`#current--${activePlayer}`).textContent =
         currentScore;
