@@ -22,6 +22,7 @@ const initialize = () => {
   currentScore = 0;
   activePlayer = 0;
   isPlaying = true;
+  previousDice = 0;
 
   diceImg.classList.add("hidden");
   player0Container.classList.remove("player--winner");
